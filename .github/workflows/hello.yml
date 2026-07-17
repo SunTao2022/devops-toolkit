@@ -1,0 +1,13 @@
+name: Hello CI
+
+on:
+  push:
+    branch: [ master ]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+  step:
+  - name: print
+  run: echo "Hello from Github Actions"
