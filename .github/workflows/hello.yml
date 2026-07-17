@@ -2,12 +2,12 @@ name: Hello CI
 
 on:
   push:
-    branch: [ master ]
+    branches: [ master ]
 
 jobs:
   say-hello:
     runs-on: ubuntu-latest
 
-  step:
-  - name: print
-  run: echo "Hello from Github Actions"
+    steps:
+    - name: print
+      run: echo "Hello from Github Actions"
