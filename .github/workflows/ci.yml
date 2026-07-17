@@ -12,7 +12,7 @@ jobs:
         working-directory: ./devops-toolkit
     steps:
     - name: pull code
-      uses: action/checkout@v4
+      uses: actions/checkout@v4
 
     - name: install python
       uses: actions/setup-python@v5
