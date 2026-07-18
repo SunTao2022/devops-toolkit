@@ -19,6 +19,11 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: run check toolkit
-      run: python main.py
+    - name: SP login
+      run: |
+        az login --service-principal \
+          --username ${{ secrets.ARM_CLIENT_ID }} \
+          --password ${{ secrets.ARM_CLIENT_SECRET }} \
+          --tenant ${{ secrets.ARM_TENANT_ID }}
+        az account show --query "{subscription:id, name:name}" -o tsv
 
