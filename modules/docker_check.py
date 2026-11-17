@@ -1,14 +1,17 @@
+"""Docker container diagnostics."""
+
 from modules.shell_utils import run_command
 
-def check_docker_ps():
-    result = run_command(["docker" , "ps" , "--format" , "table{{.Names}}\t{{.Status}}\t{{.Port}}"])
 
-    if result.startswith('Error'):
-        return "[Docker] Docker 未安装或未启动"
-    
-    if result.count('\n') <= 1:
-        return "[Docker] 没有运行中的容器"
-    
-    
-    return f"[Docker] 运行中的容器:\n{result}"
+def check_docker_ps() -> str:
+    result = run_command(
+        ["docker", "ps", "--format", "table {{.Names}}\t{{.Status}}\t{{.Ports}}"]
+    )
+    if result.startswith("Error:"):
+        return f"[Docker] Unable to list containers: {result}"
 
+    lines = result.splitlines()
+    if len(lines) <= 1:
+        return "[Docker] No running containers"
+
+    return f"[Docker] Running containers:\n{result}"
